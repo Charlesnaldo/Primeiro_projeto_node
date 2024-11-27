@@ -1,0 +1,281 @@
+Reset de margin e padding
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("/img/musculacao.png"),
+    linear-gradient(rgba(243, 2, 2, 0.25), rgba(174, 15, 15, 0.5)); /* Gradiente com opacidade */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+/* Contêiner principal de login */
+.login-container {
+    background-color: #000000e9 ;
+    padding: 50px;
+    border-radius: 18px;
+    box-shadow: rgba(18, 17, 17, 0.17) 0px -23px 25px 0px inset, rgba(108, 104, 104, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(253, 84, 84, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    width: 100%;
+    max-width: 400px;
+    margin: 30px; /* Garante espaçamento em torno do contêiner */
+}
+
+/* Título do formulário */
+h2 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Estilo para cada grupo de formulário */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Estilo para os rótulos (labels) */
+label {
+    font-size: 14px;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilo dos campos de entrada (input) */
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border-color: #f7f7f7e4;
+    box-shadow: 0 0 8px rgba(1, 129, 22, 0.3);
+}
+
+/* Estilo do botão de login */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4c210a;
+    color: #6c5e5e;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #065012;
+    transform: scale(1.05); /* Efeito sutil de zoom ao passar o mouse */
+}
+
+/* Seção de troca entre login e registro */
+.switch-section {
+    color:#f3f1f1;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.switch-section a {
+    text-decoration: none;
+    color: #fdfdfd;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.switch-section a:hover {
+    color: #f7f7f7;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px;
+        max-width: 100%; /* Garante que o formulário ocupe toda a tela */
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"] {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+.switch-section2 {
+    color: #f3f1f1;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 0px;
+}
+
+/* Aqui começa a style do cadastro */
+#show-signup{
+    color: #f3f1f1;
+}
+
+/* Estilos gerais */
+.container {
+    background-color: #000000e9 ;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Título */
+h2 {
+    text-align: center;
+    color: #f9f9f9;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Estilo para cada campo do formulário */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    color: #fbfbfb;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo de foco para campos de entrada */
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #018116;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+/* Estilo do botão */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #484848;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efeito de hover no botão */
+.btn:hover {
+    background-color: #585656;
+    transform: scale(1.05);
+}
+
+/* Estilo para a seção de troca de página */
+.switch-section {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.switch-section a {
+    text-decoration: none;
+    color: #f3f1f1;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.switch-section a:hover {
+    color: #f8f8f8;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+
+.container dashboard-container{
+    color: #f3f1f1;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none; /* Desativa eventos para o formulário invisível */
+}
+
+/* Estilo das mensagens de sucesso e erro */
+.alert {
+    position: absolute;
+    top: 20px; /* Coloca as mensagens no topo da página */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza as mensagens horizontalmente */
+    width: auto;
+    max-width: 400px; /* Limita o tamanho da mensagem */
+    z-index: 1050; /* Garante que as mensagens fiquem acima de outros elementos */
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    display: none; /* Inicialmente oculto */
+}
+
+/* Mensagem de sucesso */
+.alert-success {
+    background-color: #4caf50;
+}
+
+/* Mensagem de erro */
+.alert-danger {
+    background-color: #f44336;
+}

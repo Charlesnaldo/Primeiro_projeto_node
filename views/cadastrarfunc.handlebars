@@ -1,0 +1,230 @@
+<style>/* Resetando margens e paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("/img/academiavazia.jpg"),
+    linear-gradient(rgba(243, 2, 2, 0.25), rgba(174, 15, 15, 0.5)); /* Gradiente com opacidade */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* Container do Formulário */
+.container2 {
+    background-color: #2c2929;
+    padding: 50px;
+    border-radius: 18px;
+    box-shadow: rgba(244, 51, 51, 0.25) 0px 30px 60px -12px inset, rgba(225, 21, 21, 0.3) 0px 18px 36px -18px inset;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Título */
+h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Estilo para cada campo do formulário */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    color: #fbfbfb;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo de foco para campos de entrada */
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #018116;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+/* Estilo do botão */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #018116;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efeito de hover no botão */
+.btn:hover {
+    background-color: #018116;
+    transform: scale(1.05);
+}
+
+/* Estilo para a seção de troca de página */
+.switch-section {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.switch-section a {
+    text-decoration: none;
+    color: #018116;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.switch-section a:hover {
+    color: #018116;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+.alert {
+    position: absolute;
+    top: 20px; /* Coloca as mensagens no topo da página */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza as mensagens horizontalmente */
+    width: auto;
+    max-width: 400px; /* Limita o tamanho da mensagem */
+    z-index: 1050; /* Garante que as mensagens fiquem acima de outros elementos */
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    display: none; /* Inicialmente oculto */
+}
+
+/* Mensagem de sucesso */
+.alert-success {
+    background-color: #4caf50;
+}
+
+/* Mensagem de erro */
+.alert-danger {
+    background-color: #f44336}
+
+</style>
+    {{#if errorMessage}}
+        <div class="alert alert-danger">
+            {{errorMessage}}
+        </div>
+    {{/if}}
+
+    
+    <div class="container">
+        <h2>Cadastro de Funcionario</h2>
+        <form action="/cadastrarfunc" method="post" class="form-container">
+            <div class="form-group">
+                <label for="name">Nome Completo</label>
+                <input type="text" id="name" name="nome_completo" placeholder="Digite seu nome completo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="senha" placeholder="Crie uma senha" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cargo">Cargo</label>
+                <input type="text" id="confirmPassword" name="cargo" placeholder="Qual seu cargo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="data_admissao">Data de Admissão</label>
+                <input type="date" id="data_admissao" name="data_admissao" required>
+            </div>
+
+
+            <button type="submit" class="btn">cadastrar</button>
+        </form>
+
+        <div class="switch-section">
+            <p>Já tem uma conta? <a href="/">Entrar</a></p>
+        </div>
+    </div>
+      <div class="error-message" id="error-message"></div>
+    </div>
+
+    
+    <script>
+// Aguardar o carregamento completo da página para exibir as mensagens
+window.addEventListener('DOMContentLoaded', (event) => {
+    // Verifica se há mensagens de sucesso ou erro na renderização
+    const successMessage = document.querySelector('.alert-success');
+    const errorMessage = document.querySelector('.alert-danger');
+    
+    // Exibe a mensagem de sucesso se houver
+    if (successMessage && successMessage.innerHTML.trim() !== '') {
+        successMessage.style.display = 'block'; // Exibe a mensagem de sucesso
+
+        // Após 5 segundos, a mensagem de sucesso desaparece
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 5000); // 5000 milissegundos = 5 segundos
+    }
+
+    // Exibe a mensagem de erro se houver
+    if (errorMessage && errorMessage.innerHTML.trim() !== '') {
+        errorMessage.style.display = 'block'; // Exibe a mensagem de erro
+
+        // Após 5 segundos, a mensagem de erro desaparece
+        setTimeout(() => {
+            errorMessage.style.display = 'none';
+        }, 5000); // 5000 milissegundos = 5 segundos
+    }
+});
+
+</script>
+</body>
+</html>

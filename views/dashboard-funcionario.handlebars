@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Funcionário</title>
+    <!-- Link para o Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-white"> <!-- Aqui você define o fundo escuro e texto branco -->
+    <style>
+            body {
+        
+        height: 100vh;
+        margin: 0;
+        background-image: url("/img/musculacao.png"),
+        linear-gradient(rgba(243, 2, 2, 0.25), rgba(174, 15, 15, 0.5)); /* Gradiente com opacidade */
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+}
+        
+
+    </style>
+
+    <div class="container mt-5">
+        <div class="dashboard-container">
+            <h1 class="text-white">Bem-vindo, {{nome_completo}}!</h1>
+            <p class="text-white">Este é o seu painel, onde você pode gerenciar as informações dos seus alunos.</p>
+
+            <a href="/logout" class="btn btn-light">Sair</a> <!-- Link para logout -->
+        </div>
+
+        <!-- Tabela de pacientes -->
+        <h2 class="text-white mt-4">Lista de Alunos</h2>
+        <table class="table table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Nome Completo</th>
+                    <th scope="col">E-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each pacientes}}
+                <tr>
+                    <td>{{this.nome_completo}}</td>
+                    <td>{{this.email}}</td>
+                    
+                    <td>
+                        <!-- deletar o Aluno -->
+                         
+                        <button class="btn btn-secondary " onclick="deletarPaciente({{this.id}}, this.closest('tr'))">Deletar</button>
+
+                        <button class="btn btn-warning mt-2" onclick="abrirModalAlterar({{this.id}}, '{{this.nome_completo}}', '{{this.email}}')">Alterar</button>
+
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal de Alteração de Aluno -->
+<div class="modal fade" id="modalAlterar" tabindex="-1" role="dialog" aria-labelledby="modalAlterarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAlterarLabel">Alterar Dados do Aluno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formAlterarAluno">
+                    <div class="form-group">
+                        <label for="nome_completo">Nome Completo</label>
+                        <input type="text" class="form-control" id="nome_completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Link para o Bootstrap JS (opcional, se necessário) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+   
+<script>
+ function deletarPaciente(id, linha) {
+    // Verifica se o id foi passado corretamente
+    if (!id) {
+        alert("ID do paciente não encontrado.");
+        return;
+    }
+
+    // Confirmar se o usuário deseja excluir
+    if (!confirm('Tem certeza que deseja excluir este paciente?')) {
+        return;
+    }
+
+    // Enviar requisição DELETE via Fetch
+    fetch(`/funcionario/deletar-paciente/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        // Verificar o status da resposta
+        if (response.status === 204) {
+            // Se a exclusão for bem-sucedida, remover a linha da tabela
+            linha.remove();
+            alert('Paciente excluído com sucesso!');
+        } else {
+            // Caso haja um erro no processo de exclusão
+            alert('Erro ao excluir paciente.');
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao excluir paciente.');
+    });
+}
+
+// Função para abrir o modal de alteração com os dados do aluno
+function abrirModalAlterar(id, nome, email) {
+    // Preencher os campos do formulário com os dados do aluno
+    document.getElementById('nome_completo').value = nome;
+    document.getElementById('email').value = email;
+
+    // Armazenar o ID do aluno no formulário para enviar ao backend
+    document.getElementById('formAlterarAluno').dataset.alunoId = id;
+
+    // Mostrar o modal
+    $('#modalAlterar').modal('show');
+}
+
+// Adicionar o ouvinte de evento para o formulário de atualização
+document.getElementById('formAlterarAluno').addEventListener('submit', function(event) {
+    event.preventDefault();  // Impede o envio padrão do formulário
+    
+    const id = this.dataset.alunoId;  // Recupera o ID do aluno
+    const nome = document.getElementById('nome_completo').value;
+    const email = document.getElementById('email').value;
+
+    // Enviar os dados via Fetch
+    fetch(`/funcionario/alterar-aluno/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nome_completo: nome, email: email })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Dados do aluno atualizados com sucesso!');
+            window.location.reload();
+            // Atualizar os dados na tabela sem recarregar a página
+            atualizarDadosTabela(id, nome, email);
+            $('#modalAlterar').modal('hide');  // Fechar o modal
+        } else {
+            return response.json();  // Tente obter a resposta como JSON caso o status não seja OK
+        }
+    })
+    .then(data => {
+        if (data && data.message) {
+            alert(data.message);  // Mostrar a mensagem de erro, se houver
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao atualizar os dados do aluno.');
+    });
+});
+
+// Função para atualizar os dados da tabela sem recarregar a página
+function atualizarDadosTabela(id, nome, email) {
+    const linha = document.getElementById(`paciente-${id}`);
+    if (linha) {
+        linha.cells[0].innerText = nome;  // Atualiza a célula do nome
+        linha.cells[1].innerText = email;  // Atualiza a célula do e-mail
+    }
+}
+
+
+</script>
+</body>
+
+</html>

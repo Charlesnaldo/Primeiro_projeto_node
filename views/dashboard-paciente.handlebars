@@ -1,0 +1,96 @@
+
+  
+    <!-- Link do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+</head>
+<body>
+   
+
+    <style>
+      html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Faz com que o body e html ocupem 100% da altura da tela */
+}
+
+body {
+    background-image: url('/img/nutricao4.png'); 
+    background-size: cover; /* A imagem cobre 100% da tela */
+    background-position: center; /* A imagem será centralizada */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    height: 100%; /* Garante que o body tenha altura 100% */
+}
+    </style>
+
+
+
+
+
+    <div class="container dashboard-container mt-4" style="color: white";>
+        <h1>Bem-vindo, {{nome_completo}}!</h1>
+        <p>Este é o seu painel, onde você pode visualizar e editar suas informações.</p>
+        <p>E-mail: {{email}}</p> <!-- Exibe o e-mail do paciente -->
+        
+        <!-- Link de Logout -->
+    <a href="/logout" class="mx-auto p-2 btn btn-danger btn-sm m-2"style="width: 200px;">Sair</a>
+
+        <!-- Seção de opções -->
+        <div class="row dashboard-options"style="color: black">
+
+            <!-- Opção: Plano de Treino -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Plano de Treino</h5>
+                        <p class="card-text">Acesse seu plano de treino personalizado.</p>
+                        <a href="/plano-treino" class="btn btn-primary">Ver Plano</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opção: Histórico de Treinos -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Histórico de Treinos</h5>
+                        <p class="card-text">Veja o histórico completo dos seus treinos.</p>
+                        <a href="/historico" class="btn btn-success">Ver Histórico</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opção: Progresso -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Progresso</h5>
+                        <p class="card-text">Acompanhe seu progresso e resultados.</p>
+                        <a href="/progresso" class="btn btn-info">Ver Progresso</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opção: Configurações de Conta -->
+            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Configurações</h5>
+                        <p class="card-text">Gerencie suas preferências e configurações de conta.</p>
+                        <a href="/configuracoes" class="btn btn-warning">Ver Configurações</a>
+                    </div>
+                </div>
+            </div>
+
+               <div class="col-12 col-sm-6 col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Dieta</h5>
+                        <p class="card-text">Gerencie suas refeições aqui.</p>
+                        <a href="/dieta" class="btn btn-dark">Ver Refeições</a>
+                    </div>
+                </div>
+            </div>
+
+           
+             

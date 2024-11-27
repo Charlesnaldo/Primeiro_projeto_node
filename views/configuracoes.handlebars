@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <style> 
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+           
+            /* Faz com que o body e html ocupem 100% da altura da tela */
+        }
+    
+        body {
+            background-image: url('/img/nutricao4.png');
+            background-size: cover;
+            /* A imagem cobre 100% da tela */
+            background-position: center;
+            /* A imagem será centralizada */
+            background-repeat: repeat;
+            /* Impede que a imagem se repita */
+            height: 100%;
+            /* Garante que o body tenha altura 100% */
+        }
+        </style>
+
+    <div class="container mt-5">
+        <h1 class="text-center text-white">Configurações</h1>
+        <p class="text-center text-white">Altere suas informações pessoais e preferências.</p>
+
+        <form action="/configurar" method="POST">
+            <div class="mb-3">
+                <label for="nome_completo" class="form-label">Nome Completo</label>
+                <input type="text" class="form-control" id="nome_completo" name="nome_completo" placeholder="Digite seu nome completo">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email">
+            </div>
+
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Crie ou altere sua senha">
+            </div>
+
+            <div class="mb-3">
+                <label for="preferencias" class="form-label">Preferências</label>
+                <select class="form-select" id="preferencias" name="preferencias">
+                    <option value="cardio">Cardio</option>
+                    <option value="forca">Força</option>
+                    <option value="flexibilidade">Flexibilidade</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </form>
+
+        <!-- Botão Voltar -->
+        <a href="paciente/dashboard-paciente" class="btn btn-secondary mt-3">Voltar para a Página Inicial</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

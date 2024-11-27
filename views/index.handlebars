@@ -1,0 +1,279 @@
+
+
+<style>
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("/img/musculacao.png"),
+    linear-gradient(rgba(243, 2, 2, 0.25), rgba(174, 15, 15, 0.5)); /* Gradiente com opacidade */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px); /* Move o elemento para baixo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Volta para a posição original */
+    }
+}
+
+/* Contêiner geral do formulário */
+.container, .login-container {
+    background-color: #000000e9;
+    padding: 50px;
+    border-radius: 18px;
+    box-shadow: rgba(18, 17, 17, 0.17) 0px -23px 25px 0px inset, rgba(108, 104, 104, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(253, 84, 84, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    width: 100%;
+    max-width: 400px;
+    margin: 30px;
+    animation: fadeIn 0.6s ease-out; /* Aplica a animação de fade-in */
+}
+
+/* Título do formulário */
+h2 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Estilo para cada grupo de formulário */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Estilo para os rótulos (labels) */
+label {
+    font-size: 14px;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilo dos campos de entrada (input) */
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo de foco para campos de entrada */
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border-color: #f7f7f7e4;
+    box-shadow: 0 0 8px rgba(1, 129, 22, 0.3);
+}
+
+/* Estilo do botão */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #484645;
+    color: #f8f8f8;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #232423;
+    transform: scale(1.05);
+}
+
+/* Seção de troca entre login e cadastro */
+.switch-section {
+    color: #f3f1f1;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.switch-section a {
+    text-decoration: none;
+    color: #fdfdfd;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.switch-section a:hover {
+    color: #f7f7f7;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 480px) {
+    .login-container, .container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"] {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Estilo das mensagens de sucesso e erro */
+.alert {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 400px;
+    z-index: 1050;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    display: none;
+}
+
+.alert-success {
+    background-color: #4caf50;
+}
+
+.alert-danger {
+    background-color: #f44336;
+}
+
+</style>
+
+
+<div class="login-container">
+
+    {{#if successMessage}}
+    <div class="alert alert-success">{{successMessage}}</div>
+    {{/if}}
+
+    {{#if errorMessage}}
+    <div class="alert alert-danger">{{errorMessage}}</div>
+    {{/if}}
+
+    {{#if loginSuccess}}
+        <div class="alert alert-success">Login realizado com sucesso!</div>
+    {{/if}}
+
+    <!-- Formulário de Login para Paciente -->
+    <div id="funcionario-form">
+        <h2>Aluno</h2>
+        <form action="/login/paciente" method="POST">
+            <div class="form-group">
+                <label for="username-paciente">E-mail</label>
+                <input type="text" id="username-paciente" name="email" placeholder="Digite seu e-mail" required>
+            </div>
+            <div class="form-group">
+                <label for="password-paciente">Senha</label>
+                <input type="password" id="password-paciente" name="senha" placeholder="Digite sua senha" required>
+            </div>
+            <button type="submit" class="btn">Entrar como Aluno</button>
+        </form>
+        <div class="switch-section">
+            <p>É um Funcionário? <a href="javascript:void(0);" onclick="switchToFuncionario()">Faça login aqui</a></p>
+        </div>
+        <div class="switch-section2">
+            <p>Ainda não tem conta? <a href="cadastro" id="show-signup">Fazer Cadastro</a></p>
+        </div>
+    </div>
+
+    <!-- Formulário de Login para Funcionário (invisível inicialmente) -->
+    <div id="paciente-form" style="display:none;">
+        <h2>Funcionário</h2>
+        <form action="/login/funcionario" method="POST">
+            <div class="form-group">
+                <label for="username-funcionario">E-mail</label>
+                <input type="text" id="username-funcionario" name="email" placeholder="Digite seu e-mail" required>
+            </div>
+            <div class="form-group">
+                <label for="password-funcionario">Senha</label>
+                <input type="password" id="password-funcionario" name="senha" placeholder="Digite sua senha" required>
+            </div>
+            <button type="submit" class="btn">Entrar como Funcionário</button>
+        </form>
+        <div class="switch-section">
+            <p>É um Aluno? <a href="javascript:void(0);" onclick="switchToPaciente()">Faça login aqui</a></p>
+        </div>
+        <div class="switch-section2">
+            <p>Ainda não tem conta? <a href="/cadastrarfunc" id="show-signup">Fazer Cadastro</a></p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Função para alternar para o formulário de login do paciente
+    function switchToPaciente() {
+        document.getElementById('funcionario-form').style.display = 'block';
+        document.getElementById('paciente-form').style.display = 'none';
+    }
+
+    // Função para alternar para o formulário de login do funcionário
+    function switchToFuncionario() {
+        document.getElementById('funcionario-form').style.display = 'none';
+        document.getElementById('paciente-form').style.display = 'block';
+    }
+</script>
+
+<script>
+// Aguardar o carregamento completo da página para exibir as mensagens
+window.addEventListener('DOMContentLoaded', (event) => {
+    // Verifica se há mensagens de sucesso ou erro na renderização
+    const successMessage = document.querySelector('.alert-success');
+    const errorMessage = document.querySelector('.alert-danger');
+    
+    // Exibe a mensagem de sucesso se houver
+    if (successMessage && successMessage.innerHTML.trim() !== '') {
+        successMessage.style.display = 'block'; // Exibe a mensagem de sucesso
+
+        // Após 5 segundos, a mensagem de sucesso desaparece
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 5000); // 5000 milissegundos = 5 segundos
+    }
+
+    // Exibe a mensagem de erro se houver
+    if (errorMessage && errorMessage.innerHTML.trim() !== '') {
+        errorMessage.style.display = 'block'; // Exibe a mensagem de erro
+
+        // Após 5 segundos, a mensagem de erro desaparece
+        setTimeout(() => {
+            errorMessage.style.display = 'none';
+        }, 5000); // 5000 milissegundos = 5 segundos
+    }
+});
+
+</script>
